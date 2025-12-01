@@ -105,7 +105,7 @@ paths:
                 description: 'For customers with legacy systems requiring specific JSON format'
                 value:
                   cid: 'JS0815DE'
-                  orderLinesData: '[{"productId": 12,"quantity": 10000,"customerReference": ["PO0000001.2", "SM20180105|042"],"couponCode": "pes[Bh.u*t"}]'
+                  orderLinesData: '[{"productId": 12,"quantity": 10000,"customerReference": ["PO0000001.2", "SM20180105|042"],"couponCode": "pes[Bh.u*t"}},{"productId": 13,"quantity": 2000}]'
       responses:
         '200':
           description: 'Order successfully created'
@@ -488,7 +488,7 @@ components:
           type: string
           pattern: '^[a-f0-9]{32}$'
           example: '3d06ac5e1bdf39d26392f8100f124742'
-          description: 'Unique order number (MD5 hash format)'
+          description: 'Unique order number (32-character hexadecimal identifier)'
         paymentDue:
           type: string
           format: date
@@ -524,7 +524,7 @@ components:
         customerReference:
           type: string
           maxLength: 50
-          pattern: '^[A-Z]{2}[0-9]{7}(\.[0-9]+)?$'
+          pattern: '^[A-Z]{2}[0-9]{6,7}(\.[0-9]+)?$'
           example: 'PO0000001'
           description: 'Customer purchase order reference or internal tracking number'
       description: 'Individual line item in an order using standard JSON format'
@@ -540,7 +540,7 @@ components:
     OrderLinesData:
       type: string
       maxLength: 1000000
-      example: '[{"productId": 12,"quantity": 10000,"customerReference": ["PO0000001.2", "SM20180105|042"],"couponCode": "pes[Bh.u*t"},{"productId": 13,"quantity": 2000,"customerReference": "PO0000003.4"}]'
+      example: '[{"productId": 12,"quantity": 10000,"customerReference": ["PO0000001.2", "SM20180105|042"],"couponCode": "pes[Bh.u*t"}},{"productId": 13,"quantity": 2000,"customerReference": "PO0000003.4"}]'
       description: |
         Order line(s) in customer-specific JSON format (provided as a JSON string).
         
